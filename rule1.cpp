@@ -21,4 +21,11 @@ int neighbor_num(int x, int y, int map[][maxl])
 	}
 	return cnt;
 }
+//½«map¿½±´µ½tmp_map
+void copy_map(int map[][maxl], int tmp_map[][maxl])
+{
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < n; j++)
+			tmp_map[i][j] = map[i][j];
+}
 
