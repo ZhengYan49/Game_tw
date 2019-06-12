@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<time.h> 
 #include<iostream>
+#include<conio.h>
 using namespace std;
 
 const int DEATH = 0;
@@ -110,7 +111,6 @@ void print_general()
 			else printf("□");
 			printf("\n");
 	}
-	system("pause");
 }
 
 //将map复制到tmp_map
@@ -123,7 +123,8 @@ void copy_map(int map[][maxl], int tmp_map[][maxl])
 
 //得到下一代
 void iteration()
-{
+{	
+	system("cls");
 	int tmp_map[maxr][maxl];
 	copy_map(map, tmp_map);        //保存之前图像，使得当前元素状态的改变还是基于之前的地图，而不是被修改了的
 	for (int i = 0; i < m; i++)
@@ -144,10 +145,102 @@ void iteration()
 
 int main()
 {
-	rule_Tumbler();
-	print_general();
-	while (1)
-		iteration();
+	//rule_Tumbler();
+	//print_general();
+	//while (1)
+		//iteration();
 
-	return 0;
+	//return 0;
+	int end = 1;
+	int end1 = 1;
+	while (end)
+	{
+		int number;
+		printf("请选择您要操作的初始图案\n");
+		printf("                               1.RandomPattern\n");
+		printf("                               2.10CellRow\n");
+		printf("                               3.Glider\n");
+		printf("                               4.SmallExploder\n");
+		printf("                               5.Exploder\n");
+		printf("                               6.LightWeightSpaceShip\n");
+		printf("                               7.Tumbler\n");
+		printf("                               8.退出\n");
+		end1 = 1;
+		cin >> number;
+		switch (number)
+		{
+		case 1:
+			RandomPattern();
+			print_general();
+			printf("请选择您要迭代的次数：\n");
+			cin >> number;
+			for(int i =0 ;i < number;i++)
+			{
+				iteration();
+			}
+			break;
+		case 2:
+			rule_10CellRow();
+			print_general();
+			printf("请选择您要迭代的次数：\n");
+			cin >> number;
+			for (int i = 0; i < number; i++)
+			{
+				iteration();
+			}
+			break;
+		case 3:
+			rule_Glider();
+			print_general();
+			printf("请选择您要迭代的次数：\n");
+			cin >> number;
+			for (int i = 0; i < number; i++)
+			{
+				iteration();
+			}
+			break;
+		case 4:
+			rule_SmallExploder();
+			print_general();
+			printf("请选择您要迭代的次数：\n");
+			cin >> number;
+			for (int i = 0; i < number; i++)
+			{
+				iteration();
+			}
+			break;
+		case 5:
+			rule_Exploder();
+			print_general();
+			printf("请选择您要迭代的次数：\n");
+			cin >> number;
+			for (int i = 0; i < number; i++)
+			{
+				iteration();
+			}
+			break;
+		case 6:
+			rule_LightWeightSpaceShip();
+			print_general();
+			printf("请选择您要迭代的次数：\n");
+			cin >> number;
+			for (int i = 0; i < number; i++)
+			{
+				iteration();
+			}
+			break;
+		case 7:
+			rule_Tumbler();
+			print_general();
+			printf("请选择您要迭代的次数：\n");
+			cin >> number;
+			for (int i = 0; i < number; i++)
+			{
+				iteration();
+			}
+			break;
+		case 8:
+			break;
+		}
+	}
 }
