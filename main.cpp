@@ -2,7 +2,14 @@
 int map[maxr][maxl], newmap[maxr][maxl];
 int m, n, general = 0;
 
-
+void rule_10CellRow()
+{
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < n; j++)
+			map[i][j] = 0;        //假设约n/2
+	for(int i = 5 ;i < 15 ;i++ )
+		map[5][i] = 1;
+}
 //初始化，生成随机数（无法避免随机数的浪费）
 void rule1()
 {
@@ -62,8 +69,7 @@ void print_general()
 }
 int main()
 {
-	std::cin>>m>>n;
-	rule1();
+	rule_10CellRow();
 	print_general();
 	while (1)
 		iteration();
