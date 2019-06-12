@@ -28,4 +28,22 @@ void copy_map(int map[][maxl], int tmp_map[][maxl])
 		for (int j = 0; j < n; j++)
 			tmp_map[i][j] = map[i][j];
 }
+void iteration()
+{
+	int tmp_map[maxr][maxl];
+	copy_map(map, tmp_map);        //保存之前图像，使得当前元素状态的改变还是基于之前的地图，而不是被修改了的
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < n; j++)
+		{
+			int cnt = neighbor_num(i, j, tmp_map);
+			switch (cnt)
+			{
+			case 2: continue;
+			case 3: map[i][j] = ALIVE; break;
+			default: map[i][j] = DATH; break;
+			}
+		}
 
+	general++;
+	print_general();
+}
