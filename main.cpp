@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<time.h> 
 #include<iostream>
-#include<conio.h>
+#include <Windows.h>
 using namespace std;
 
 const int DEATH = 0;
@@ -10,8 +10,11 @@ const int ALIVE = 1;
 const int maxr = 200, maxl = 200;
 const int dx[] = { -1,-1,-1,0,1,1,1,0 }, dy[] = { -1,0,1,1,1,0,-1,-1 };
 
+HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD coord = {0,0 };
+
 int map[maxr][maxl], newmap[maxr][maxl];
-const int m = 50, n = 50; 
+const int m = 40, n = 40; 
 int general = 0;
 //初始化，生成随机数（无法避免随机数的浪费）
 void RandomPattern()
@@ -103,13 +106,13 @@ int neighbor_num(int x, int y, int map[][maxl])
 //打印第i代的结果
 void print_general()
 {
-	printf("第%d代：\n", general);
+	//cout <<"第"<<general<<"代：" <<endl ;
 	for (int i = 0; i < m; i++)
 	{
 		for (int j = 0; j < n; j++)
-			if (map[i][j])  printf("■");
-			else printf("□");
-			printf("\n");
+			if (map[i][j])  cout <<"■";
+			else cout <<"□";
+			cout <<"\n";
 	}
 }
 
@@ -124,7 +127,8 @@ void copy_map(int map[][maxl], int tmp_map[][maxl])
 //得到下一代
 void iteration()
 {	
-	system("cls");
+	//system("cls");
+	//SetConsoleCursorPosition(hOutput, coord);
 	int tmp_map[maxr][maxl];
 	copy_map(map, tmp_map);        //保存之前图像，使得当前元素状态的改变还是基于之前的地图，而不是被修改了的
 	for (int i = 0; i < m; i++)
@@ -156,90 +160,114 @@ int main()
 	while (end)
 	{
 		int number;
-		printf("请选择您要操作的初始图案\n");
-		printf("                               1.RandomPattern\n");
-		printf("                               2.10CellRow\n");
-		printf("                               3.Glider\n");
-		printf("                               4.SmallExploder\n");
-		printf("                               5.Exploder\n");
-		printf("                               6.LightWeightSpaceShip\n");
-		printf("                               7.Tumbler\n");
-		printf("                               8.退出\n");
+		int number1;
+		cout <<"请选择您要操作的初始图案                                         \n";
+		cout <<"                               1.RandomPattern                   \n";
+		cout <<"                               2.10CellRow                       \n";
+		cout <<"                               3.Glider                          \n";
+		cout <<"                               4.SmallExploder                   \n";
+		cout <<"                               5.Exploder                        \n";
+		cout <<"                               6.LightWeightSpaceShip            \n";
+		cout <<"                               7.Tumbler                         \n";
+		cout <<"                               8.exit                            \n";
 		end1 = 1;
-		cin >> number;
-		switch (number)
+		cin >> number1;
+		system("cls");
+		switch (number1)
 		{
 		case 1:
 			RandomPattern();
 			print_general();
-			printf("请选择您要迭代的次数：\n");
+			cout <<"请选择您要迭代的次数：\n";
 			cin >> number;
+			system("cls");
 			for(int i =0 ;i < number;i++)
 			{
+				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
+			system("pause");system("cls");
 			break;
 		case 2:
 			rule_10CellRow();
 			print_general();
-			printf("请选择您要迭代的次数：\n");
+			cout << "请选择您要迭代的次数：\n";
 			cin >> number;
-			for (int i = 0; i < number; i++)
+			system("cls");
+			for (int i = 0; i <number; i++)
 			{
+				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
+			system("pause");system("cls");
 			break;
 		case 3:
 			rule_Glider();
 			print_general();
-			printf("请选择您要迭代的次数：\n");
+			cout << "请选择您要迭代的次数：\n";
 			cin >> number;
+			system("cls");
 			for (int i = 0; i < number; i++)
 			{
+				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
+			system("pause");system("cls");
 			break;
 		case 4:
 			rule_SmallExploder();
 			print_general();
-			printf("请选择您要迭代的次数：\n");
+			cout << "请选择您要迭代的次数：\n";
 			cin >> number;
+			system("cls");
 			for (int i = 0; i < number; i++)
 			{
+				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
+			system("pause");system("cls");
 			break;
 		case 5:
 			rule_Exploder();
 			print_general();
-			printf("请选择您要迭代的次数：\n");
+			cout << "请选择您要迭代的次数：\n";
 			cin >> number;
+			system("cls");
 			for (int i = 0; i < number; i++)
 			{
+				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
+			system("pause");system("cls");
 			break;
 		case 6:
 			rule_LightWeightSpaceShip();
 			print_general();
-			printf("请选择您要迭代的次数：\n");
+			cout << "请选择您要迭代的次数：\n";
 			cin >> number;
+			system("cls");
 			for (int i = 0; i < number; i++)
 			{
+				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
+			system("pause");system("cls");
 			break;
 		case 7:
 			rule_Tumbler();
 			print_general();
-			printf("请选择您要迭代的次数：\n");
+			cout << "请选择您要迭代的次数：\n";
 			cin >> number;
+			system("cls");
 			for (int i = 0; i < number; i++)
 			{
+				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
+			system("pause");system("cls");
 			break;
-		case 8:
+		default:
+			exit(0);
 			break;
 		}
 	}
