@@ -59,3 +59,13 @@ void print_general()
 			printf("\n");
 	}
 }
+int main()
+{
+	std::cin>>m>>n;
+	rule1();
+	print_general();
+	while (1)
+		iteration();
+
+	return 0;
+}
