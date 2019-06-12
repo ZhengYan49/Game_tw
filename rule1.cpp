@@ -47,3 +47,15 @@ void iteration()
 	general++;
 	print_general();
 }
+//打印第i代的结果
+void print_general()
+{
+	printf("第%d代：\n", general);
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+			if (map[i][j])  printf("■");
+			else printf("□");
+			printf("\n");
+	}
+}
