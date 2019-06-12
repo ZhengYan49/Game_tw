@@ -58,6 +58,7 @@ void print_general()
 			else printf("¡õ");
 			printf("\n");
 	}
+	system("pause")£»
 }
 int main()
 {
