@@ -4,6 +4,7 @@
 #include<iostream>
 #include <Windows.h>
 #include <conio.h>
+#include<fstream>
 using namespace std;
 
 const int DEATH = 0;
@@ -17,6 +18,17 @@ COORD coord = { 0,0 };
 int map[maxr][maxl], newmap[maxr][maxl];
 const int m = 40, n = 40;
 int general = 0;
+string s;
+void getInput() {
+	ifstream in(s);//打开文件
+				   //读数据。。
+	for (int i = 0; i < m; ++i) {
+		for (int j = 0; j < n; ++j) {
+			in >> map[i][j];
+		}
+	}
+	in.close();//关闭文件
+}
 //初始化，生成随机数（无法避免随机数的浪费）
 void RandomPattern()
 {
@@ -30,69 +42,36 @@ void RandomPattern()
 //长条图案
 void rule_10CellRow()
 {
-	for (int i = 0; i < m; i++)
-		for (int j = 0; j < n; j++)
-			map[i][j] = 0;        //假设约n/2
-	for (int i = 5; i < 15; i++)
-		map[5][i] = 1;
+	s = "data2.txt";
+	getInput();
 }
 
 void rule_Glider()
 {
-	for (int i = 0; i < m; i++)
-		for (int j = 0; j < n; j++)
-			map[i][j] = 0;        //假设约n/2
-	map[0][2] = 1;
-	map[1][0] = 1;
-	map[1][2] = 1;
-	map[2][1] = map[2][2] = 1;
+	s = "data3.txt";
+	getInput();
 }
 
 void rule_SmallExploder()
 {
-	for (int i = 0; i < m; i++)
-		for (int j = 0; j < n; j++)
-			map[i][j] = 0;        //假设约n/2
-	map[24][25] = 1;
-	map[25][24] = map[25][25] = map[25][26] = 1;
-	map[26][24] = map[26][26] = 1;
-	map[27][25] = 1;
+	s = "data4.txt";
+	getInput();
 }
 
 void rule_Exploder() {
-	for (int i = 0; i < m; i++)
-		for (int j = 0; j < n; j++)
-			map[i][j] = 0;        //假设约n/2
-	map[23][23] = map[23][25] = map[23][27] = 1;
-	map[24][23] = map[24][27] = 1;
-	map[25][23] = map[25][27] = 1;
-	map[26][23] = map[26][27] = 1;
-	map[27][23] = map[27][25] = map[27][27] = 1;
+	s = "data5.txt";
+	getInput();
 }
 
 void rule_LightWeightSpaceShip() {
-	for (int i = 0; i < m; i++)
-		for (int j = 0; j < n; j++)
-			map[i][j] = 0;        //假设约n/2
-	map[20][21] = map[20][22] = map[20][23] = map[20][24] = 1;
-	map[21][20] = map[21][24] = 1;
-	map[22][24] = 1;
-	map[23][20] = map[23][23] = 1;
+	s = "data6.txt";
+	getInput();
 }
 
 void rule_Tumbler() {
-	for (int i = 0; i < m; i++)
-		for (int j = 0; j < n; j++)
-			map[i][j] = 0;
-	map[20][21] = map[20][22] = map[20][24] = map[20][25] = 1;
-	map[21][21] = map[21][22] = map[21][24] = map[21][25] = 1;
-	map[22][22] = map[22][24] = 1;
-	map[23][20] = map[23][22] = map[23][24] = map[23][26] = 1;
-	map[24][20] = map[24][22] = map[24][24] = map[24][26] = 1;
-	map[25][20] = map[25][21] = map[25][25] = map[25][26] = 1;
+	s = "data7.txt";
+	getInput();
 }
- 
-
 
 //计算(x,y)周围存活细胞的个数
 int neighbor_num(int x, int y, int map[][maxl])
@@ -115,7 +94,7 @@ void print_general()
 		for (int j = 0; j < n; j++)
 			if (map[i][j])  cout << "■";
 			else cout << "□";
-		cout << "\n";
+			cout << "\n";
 	}
 }
 
@@ -149,32 +128,24 @@ void iteration()
 	general++;
 	print_general();
 }
-void FullScreen() 
+void FullScreen()
 {
+
 	HWND hwnd = GetForegroundWindow();
 	int x = GetSystemMetrics(SM_CXSCREEN) + 300;
 	int y = GetSystemMetrics(SM_CYSCREEN) + 300;
-	SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, x + 300, y + 300, NULL);
-	//MoveWindow(hwnd, 50, 50, x + 300, y + 300, 1);
+	SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 700, 900, NULL);
+	MoveWindow(hwnd, 320, 0, 675, 720, 1);
+	ShowWindow(hwnd, SW_SHOW);
 }
-
 int main()
-{	
+{
 	system("color f0");
 	FullScreen();
-    int time = 1000;
+	int time = 1000;
 	char ch;
-	//rule_Tumbler();
-	//print_general();
-	//while (1)
-		//iteration();
-
-	//return 0;
-	int end = 1;
-	int end1 = 1;
-	while (end)
+	while (1)
 	{
-		int number;
 		int number1;
 		cout << "请选择您要操作的初始图案                                         \n";
 		cout << "                               1.RandomPattern                   \n";
@@ -185,7 +156,6 @@ int main()
 		cout << "                               6.LightWeightSpaceShip            \n";
 		cout << "                               7.Tumbler                         \n";
 		cout << "                               8.exit                            \n";
-		end1 = 1;
 		cin >> number1;
 		system("cls");
 		switch (number1)
@@ -202,7 +172,7 @@ int main()
 				iteration();
 				cout << " “0”极快 “1”快 “2”普通  “3”慢 “4”极慢   “ESC”结束 \n";
 				if (_kbhit()) {
-					ch = _getch(); 
+					ch = _getch();
 					if (ch == '0') time = 0;
 					else if (ch == '1') time = 500;
 					else if (ch == '2') time = 1000;
@@ -216,7 +186,7 @@ int main()
 					time = 5000;
 				Sleep(time);
 			}
-			system("pause"); 
+			system("pause");
 			system("cls");
 			break;
 		case 2:
