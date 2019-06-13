@@ -91,6 +91,8 @@ void rule_Tumbler() {
 	map[24][20] = map[24][22] = map[24][24] = map[24][26] = 1;
 	map[25][20] = map[25][21] = map[25][25] = map[25][26] = 1;
 }
+ 
+
 
 //计算(x,y)周围存活细胞的个数
 int neighbor_num(int x, int y, int map[][maxl])
@@ -147,10 +149,20 @@ void iteration()
 	general++;
 	print_general();
 }
+void FullScreen() 
+{
+	HWND hwnd = GetForegroundWindow();
+	int x = GetSystemMetrics(SM_CXSCREEN) + 300;
+	int y = GetSystemMetrics(SM_CYSCREEN) + 300;
+	SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, x + 300, y + 300, NULL);
+	//MoveWindow(hwnd, 50, 50, x + 300, y + 300, 1);
+}
 
 int main()
 {	
-	 unsigned int time = 1000;
+	system("color f0");
+	FullScreen();
+    int time = 1000;
 	char ch;
 	//rule_Tumbler();
 	//print_general();
@@ -179,115 +191,199 @@ int main()
 		switch (number1)
 		{
 		case 1:
+			cout << "                      初始图案                               \n";
 			RandomPattern();
 			print_general();
-			//cout << "请选择您要迭代的次数：\n";
-			//cin >> number;
 			system("pause");
 			system("cls");
 			while (1)
 			{
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
-				if (time > 30000)
+				cout << " “0”极快 “1”快 “2”普通  “3”慢 “4”极慢   “ESC”结束 \n";
+				if (_kbhit()) {
+					ch = _getch(); 
+					if (ch == '0') time = 0;
+					else if (ch == '1') time = 500;
+					else if (ch == '2') time = 1000;
+					else if (ch == '3') time = 1000;
+					else if (ch == '4') time = 1000;
+					else break;
+				}
+				if (time < 0)
 					time = 0;
 				else if (time > 5000)
 					time = 5000;
 				Sleep(time);
-				//ch = _getch();
-				if (_kbhit()) {
-					ch = _getch(); 
-					if (ch == 's') time -= 500;
-					else if(ch == 'w') time += 500;
-					else break;
-				}
-				//else if ((ch == 115)) time -= 1000;
 			}
-			/*
-			for (int i = 0; i < number; i++)
-			{
-				SetConsoleCursorPosition(hOutput, coord);
-				iteration();
-				Sleep(100);
-			}*/
 			system("pause"); 
 			system("cls");
 			break;
 		case 2:
+			cout << "                      初始图案                               \n";
 			rule_10CellRow();
 			print_general();
-			cout << "请选择您要迭代的次数：\n";
-			cin >> number;
+			system("pause");
 			system("cls");
-			for (int i = 0; i < number; i++)
+			while (1)
 			{
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
+				cout << " “0”极快 “1”快 “2”普通  “3”慢 “4”极慢   “ESC”结束 \n";
+				if (_kbhit()) {
+					ch = _getch();
+					if (ch == '0') time = 0;
+					else if (ch == '1') time = 500;
+					else if (ch == '2') time = 1000;
+					else if (ch == '3') time = 1000;
+					else if (ch == '4') time = 1000;
+					else break;
+				}
+				if (time < 0)
+					time = 0;
+				else if (time > 5000)
+					time = 5000;
+				Sleep(time);
 			}
 			system("pause"); system("cls");
 			break;
 		case 3:
+			cout << "                      初始图案                               \n";
 			rule_Glider();
 			print_general();
-			cout << "请选择您要迭代的次数：\n";
-			cin >> number;
+			system("pause");
 			system("cls");
-			for (int i = 0; i < number; i++)
+			while (1)
 			{
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
+				cout << " “0”极快 “1”快 “2”普通  “3”慢 “4”极慢   “ESC”结束 \n";
+				if (_kbhit()) {
+					ch = _getch();
+					if (ch == '0') time = 0;
+					else if (ch == '1') time = 500;
+					else if (ch == '2') time = 1000;
+					else if (ch == '3') time = 1000;
+					else if (ch == '4') time = 1000;
+					else break;
+				}
+				if (time < 0)
+					time = 0;
+				else if (time > 5000)
+					time = 5000;
+				Sleep(time);
 			}
 			system("pause"); system("cls");
 			break;
 		case 4:
+			cout << "                      初始图案                               \n";
 			rule_SmallExploder();
 			print_general();
-			cout << "请选择您要迭代的次数：\n";
-			cin >> number;
+			system("pause");
 			system("cls");
-			for (int i = 0; i < number; i++)
+			while (1)
 			{
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
+				cout << " “0”极快 “1”快 “2”普通  “3”慢 “4”极慢   “ESC”结束 \n";
+				if (_kbhit()) {
+					ch = _getch();
+					if (ch == '0') time = 0;
+					else if (ch == '1') time = 500;
+					else if (ch == '2') time = 1000;
+					else if (ch == '3') time = 1000;
+					else if (ch == '4') time = 1000;
+					else break;
+				}
+				if (time < 0)
+					time = 0;
+				else if (time > 5000)
+					time = 5000;
+				Sleep(time);
 			}
 			system("pause"); system("cls");
 			break;
 		case 5:
+			cout << "                      初始图案                               \n";
 			rule_Exploder();
 			print_general();
-			cout << "请选择您要迭代的次数：\n";
-			cin >> number;
+			system("pause");
 			system("cls");
-			for (int i = 0; i < number; i++)
+			while (1)
 			{
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
+				cout << " “0”极快 “1”快 “2”普通  “3”慢 “4”极慢   “ESC”结束 \n";
+				if (_kbhit()) {
+					ch = _getch();
+					if (ch == '0') time = 0;
+					else if (ch == '1') time = 500;
+					else if (ch == '2') time = 1000;
+					else if (ch == '3') time = 1000;
+					else if (ch == '4') time = 1000;
+					else break;
+				}
+				if (time < 0)
+					time = 0;
+				else if (time > 5000)
+					time = 5000;
+				Sleep(time);
 			}
 			system("pause"); system("cls");
 			break;
 		case 6:
+			cout << "                      初始图案                               \n";
 			rule_LightWeightSpaceShip();
 			print_general();
-			cout << "请选择您要迭代的次数：\n";
-			cin >> number;
+			system("pause");
 			system("cls");
-			for (int i = 0; i < number; i++)
+			while (1)
 			{
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
+				cout << " “0”极快 “1”快 “2”普通  “3”慢 “4”极慢   “ESC”结束 \n";
+				if (_kbhit()) {
+					ch = _getch();
+					if (ch == '0') time = 0;
+					else if (ch == '1') time = 500;
+					else if (ch == '2') time = 1000;
+					else if (ch == '3') time = 1000;
+					else if (ch == '4') time = 1000;
+					else break;
+				}
+				if (time < 0)
+					time = 0;
+				else if (time > 5000)
+					time = 5000;
+				Sleep(time);
 			}
 			system("pause"); system("cls");
 			break;
 		case 7:
+			cout << "                      初始图案                               \n";
 			rule_Tumbler();
 			print_general();
-			cout << "请选择您要迭代的次数：\n";
-			cin >> number;
+			system("pause");
 			system("cls");
-			for (int i = 0; i < number; i++)
+			while (1)
 			{
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
+				cout << " “0”极快 “1”快 “2”普通  “3”慢 “4”极慢   “ESC”结束 \n";
+				if (_kbhit()) {
+					ch = _getch();
+					if (ch == '0') time = 0;
+					else if (ch == '1') time = 500;
+					else if (ch == '2') time = 1000;
+					else if (ch == '3') time = 1000;
+					else if (ch == '4') time = 1000;
+					else break;
+				}
+				if (time < 0)
+					time = 0;
+				else if (time > 5000)
+					time = 5000;
+				Sleep(time);
 			}
 			system("pause"); system("cls");
 			break;
