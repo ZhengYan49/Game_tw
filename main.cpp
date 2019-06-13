@@ -3,6 +3,7 @@
 #include<time.h> 
 #include<iostream>
 #include <Windows.h>
+#include <conio.h>
 using namespace std;
 
 const int DEATH = 0;
@@ -11,10 +12,10 @@ const int maxr = 200, maxl = 200;
 const int dx[] = { -1,-1,-1,0,1,1,1,0 }, dy[] = { -1,0,1,1,1,0,-1,-1 };
 
 HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-COORD coord = {0,0 };
+COORD coord = { 0,0 };
 
 int map[maxr][maxl], newmap[maxr][maxl];
-const int m = 40, n = 40; 
+const int m = 40, n = 40;
 int general = 0;
 //初始化，生成随机数（无法避免随机数的浪费）
 void RandomPattern()
@@ -32,7 +33,7 @@ void rule_10CellRow()
 	for (int i = 0; i < m; i++)
 		for (int j = 0; j < n; j++)
 			map[i][j] = 0;        //假设约n/2
-	for(int i = 5 ;i < 15 ;i++ )
+	for (int i = 5; i < 15; i++)
 		map[5][i] = 1;
 }
 
@@ -110,9 +111,9 @@ void print_general()
 	for (int i = 0; i < m; i++)
 	{
 		for (int j = 0; j < n; j++)
-			if (map[i][j])  cout <<"■";
-			else cout <<"□";
-			cout <<"\n";
+			if (map[i][j])  cout << "■";
+			else cout << "□";
+		cout << "\n";
 	}
 }
 
@@ -126,7 +127,7 @@ void copy_map(int map[][maxl], int tmp_map[][maxl])
 
 //得到下一代
 void iteration()
-{	
+{
 	//system("cls");
 	//SetConsoleCursorPosition(hOutput, coord);
 	int tmp_map[maxr][maxl];
@@ -148,7 +149,9 @@ void iteration()
 }
 
 int main()
-{
+{	
+	 unsigned int time = 1000;
+	char ch;
 	//rule_Tumbler();
 	//print_general();
 	//while (1)
@@ -161,15 +164,15 @@ int main()
 	{
 		int number;
 		int number1;
-		cout <<"请选择您要操作的初始图案                                         \n";
-		cout <<"                               1.RandomPattern                   \n";
-		cout <<"                               2.10CellRow                       \n";
-		cout <<"                               3.Glider                          \n";
-		cout <<"                               4.SmallExploder                   \n";
-		cout <<"                               5.Exploder                        \n";
-		cout <<"                               6.LightWeightSpaceShip            \n";
-		cout <<"                               7.Tumbler                         \n";
-		cout <<"                               8.exit                            \n";
+		cout << "请选择您要操作的初始图案                                         \n";
+		cout << "                               1.RandomPattern                   \n";
+		cout << "                               2.10CellRow                       \n";
+		cout << "                               3.Glider                          \n";
+		cout << "                               4.SmallExploder                   \n";
+		cout << "                               5.Exploder                        \n";
+		cout << "                               6.LightWeightSpaceShip            \n";
+		cout << "                               7.Tumbler                         \n";
+		cout << "                               8.exit                            \n";
 		end1 = 1;
 		cin >> number1;
 		system("cls");
@@ -178,15 +181,37 @@ int main()
 		case 1:
 			RandomPattern();
 			print_general();
-			cout <<"请选择您要迭代的次数：\n";
-			cin >> number;
+			//cout << "请选择您要迭代的次数：\n";
+			//cin >> number;
+			system("pause");
 			system("cls");
-			for(int i =0 ;i < number;i++)
+			while (1)
 			{
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
+				if (time > 30000)
+					time = 0;
+				else if (time > 5000)
+					time = 5000;
+				Sleep(time);
+				//ch = _getch();
+				if (_kbhit()) {
+					ch = _getch(); 
+					if (ch == 's') time -= 500;
+					else if(ch == 'w') time += 500;
+					else break;
+				}
+				//else if ((ch == 115)) time -= 1000;
 			}
-			system("pause");system("cls");
+			/*
+			for (int i = 0; i < number; i++)
+			{
+				SetConsoleCursorPosition(hOutput, coord);
+				iteration();
+				Sleep(100);
+			}*/
+			system("pause"); 
+			system("cls");
 			break;
 		case 2:
 			rule_10CellRow();
@@ -194,12 +219,12 @@ int main()
 			cout << "请选择您要迭代的次数：\n";
 			cin >> number;
 			system("cls");
-			for (int i = 0; i <number; i++)
+			for (int i = 0; i < number; i++)
 			{
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
-			system("pause");system("cls");
+			system("pause"); system("cls");
 			break;
 		case 3:
 			rule_Glider();
@@ -212,7 +237,7 @@ int main()
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
-			system("pause");system("cls");
+			system("pause"); system("cls");
 			break;
 		case 4:
 			rule_SmallExploder();
@@ -225,7 +250,7 @@ int main()
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
-			system("pause");system("cls");
+			system("pause"); system("cls");
 			break;
 		case 5:
 			rule_Exploder();
@@ -238,7 +263,7 @@ int main()
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
-			system("pause");system("cls");
+			system("pause"); system("cls");
 			break;
 		case 6:
 			rule_LightWeightSpaceShip();
@@ -251,7 +276,7 @@ int main()
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
-			system("pause");system("cls");
+			system("pause"); system("cls");
 			break;
 		case 7:
 			rule_Tumbler();
@@ -264,7 +289,7 @@ int main()
 				SetConsoleCursorPosition(hOutput, coord);
 				iteration();
 			}
-			system("pause");system("cls");
+			system("pause"); system("cls");
 			break;
 		default:
 			exit(0);
