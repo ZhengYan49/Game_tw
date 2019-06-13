@@ -6,19 +6,19 @@
 #include <conio.h>
 #include<fstream>
 using namespace std;
-
 const int DEATH = 0;
 const int ALIVE = 1;
+const int m = 40, n = 40;
 const int maxr = 200, maxl = 200;
 const int dx[] = { -1,-1,-1,0,1,1,1,0 }, dy[] = { -1,0,1,1,1,0,-1,-1 };
+
+int general = 0;
+int map[maxr][maxl], newmap[maxr][maxl];
+string s;
 
 HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD coord = { 0,0 };
 
-int map[maxr][maxl], newmap[maxr][maxl];
-const int m = 40, n = 40;
-int general = 0;
-string s;
 void getInput() {
 	ifstream in(s);//打开文件
 				   //读数据。。
@@ -36,8 +36,6 @@ void RandomPattern()
 	for (int i = 0; i < m; i++)
 		for (int j = 0; j < n; j++)
 			map[i][j] = rand() % 2;
-
-
 }
 //长条图案
 void rule_10CellRow()
@@ -88,7 +86,6 @@ int neighbor_num(int x, int y, int map[][maxl])
 //打印第i代的结果
 void print_general()
 {
-	//cout <<"第"<<general<<"代：" <<endl ;
 	for (int i = 0; i < m; i++)
 	{
 		for (int j = 0; j < n; j++)
@@ -109,8 +106,6 @@ void copy_map(int map[][maxl], int tmp_map[][maxl])
 //得到下一代
 void iteration()
 {
-	//system("cls");
-	//SetConsoleCursorPosition(hOutput, coord);
 	int tmp_map[maxr][maxl];
 	copy_map(map, tmp_map);        //保存之前图像，使得当前元素状态的改变还是基于之前的地图，而不是被修改了的
 	for (int i = 0; i < m; i++)
@@ -124,7 +119,6 @@ void iteration()
 			default: map[i][j] = DEATH; break;
 			}
 		}
-
 	general++;
 	print_general();
 }
@@ -138,6 +132,7 @@ void FullScreen()
 	MoveWindow(hwnd, 320, 0, 675, 720, 1);
 	ShowWindow(hwnd, SW_SHOW);
 }
+
 int main()
 {
 	system("color f0");
@@ -174,16 +169,12 @@ int main()
 				if (_kbhit()) {
 					ch = _getch();
 					if (ch == '0') time = 0;
-					else if (ch == '1') time = 500;
-					else if (ch == '2') time = 1000;
+					else if (ch == '1') time = 250;
+					else if (ch == '2') time = 500;
 					else if (ch == '3') time = 1000;
-					else if (ch == '4') time = 1000;
+					else if (ch == '4') time = 2000;
 					else break;
 				}
-				if (time < 0)
-					time = 0;
-				else if (time > 5000)
-					time = 5000;
 				Sleep(time);
 			}
 			system("pause");
@@ -203,16 +194,12 @@ int main()
 				if (_kbhit()) {
 					ch = _getch();
 					if (ch == '0') time = 0;
-					else if (ch == '1') time = 500;
-					else if (ch == '2') time = 1000;
+					else if (ch == '1') time = 250;
+					else if (ch == '2') time = 500;
 					else if (ch == '3') time = 1000;
-					else if (ch == '4') time = 1000;
+					else if (ch == '4') time = 2000;
 					else break;
 				}
-				if (time < 0)
-					time = 0;
-				else if (time > 5000)
-					time = 5000;
 				Sleep(time);
 			}
 			system("pause"); system("cls");
@@ -231,16 +218,12 @@ int main()
 				if (_kbhit()) {
 					ch = _getch();
 					if (ch == '0') time = 0;
-					else if (ch == '1') time = 500;
-					else if (ch == '2') time = 1000;
+					else if (ch == '1') time = 250;
+					else if (ch == '2') time = 500;
 					else if (ch == '3') time = 1000;
-					else if (ch == '4') time = 1000;
+					else if (ch == '4') time = 2000;
 					else break;
 				}
-				if (time < 0)
-					time = 0;
-				else if (time > 5000)
-					time = 5000;
 				Sleep(time);
 			}
 			system("pause"); system("cls");
@@ -259,16 +242,12 @@ int main()
 				if (_kbhit()) {
 					ch = _getch();
 					if (ch == '0') time = 0;
-					else if (ch == '1') time = 500;
-					else if (ch == '2') time = 1000;
+					else if (ch == '1') time = 250;
+					else if (ch == '2') time = 500;
 					else if (ch == '3') time = 1000;
-					else if (ch == '4') time = 1000;
+					else if (ch == '4') time = 2000;
 					else break;
 				}
-				if (time < 0)
-					time = 0;
-				else if (time > 5000)
-					time = 5000;
 				Sleep(time);
 			}
 			system("pause"); system("cls");
@@ -287,16 +266,12 @@ int main()
 				if (_kbhit()) {
 					ch = _getch();
 					if (ch == '0') time = 0;
-					else if (ch == '1') time = 500;
-					else if (ch == '2') time = 1000;
+					else if (ch == '1') time = 250;
+					else if (ch == '2') time = 500;
 					else if (ch == '3') time = 1000;
-					else if (ch == '4') time = 1000;
+					else if (ch == '4') time = 2000;
 					else break;
 				}
-				if (time < 0)
-					time = 0;
-				else if (time > 5000)
-					time = 5000;
 				Sleep(time);
 			}
 			system("pause"); system("cls");
@@ -315,16 +290,12 @@ int main()
 				if (_kbhit()) {
 					ch = _getch();
 					if (ch == '0') time = 0;
-					else if (ch == '1') time = 500;
-					else if (ch == '2') time = 1000;
+					else if (ch == '1') time = 250;
+					else if (ch == '2') time = 500;
 					else if (ch == '3') time = 1000;
-					else if (ch == '4') time = 1000;
+					else if (ch == '4') time = 2000;
 					else break;
 				}
-				if (time < 0)
-					time = 0;
-				else if (time > 5000)
-					time = 5000;
 				Sleep(time);
 			}
 			system("pause"); system("cls");
@@ -343,16 +314,12 @@ int main()
 				if (_kbhit()) {
 					ch = _getch();
 					if (ch == '0') time = 0;
-					else if (ch == '1') time = 500;
-					else if (ch == '2') time = 1000;
+					else if (ch == '1') time = 250;
+					else if (ch == '2') time = 500;
 					else if (ch == '3') time = 1000;
-					else if (ch == '4') time = 1000;
+					else if (ch == '4') time = 2000;
 					else break;
 				}
-				if (time < 0)
-					time = 0;
-				else if (time > 5000)
-					time = 5000;
 				Sleep(time);
 			}
 			system("pause"); system("cls");
